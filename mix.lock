@@ -1,0 +1,6 @@
+%{"base16": {:hex, :base16, "1.0.0", "283644e2b21bd5915acb7178bed7851fb07c6e5749b8fad68a53c501092176d9", [], [], "hexpm"},
+  "eini": {:hex, :eini, "1.2.4", "abd64a0533398a6d714d21219bb85f2d41fdb42665ac4080939b7bfa8e55f386", [], [], "hexpm"},
+  "erlcloud": {:hex, :erlcloud, "2.2.15", "26107faf59d7e7a8cd9f08481897e89f2f47ba0889b50522af9568ce78436c55", [], [{:base16, "1.0.0", [hex: :base16, repo: "hexpm", optional: false]}, {:eini, "1.2.4", [hex: :eini, repo: "hexpm", optional: false]}, {:jsx, "2.8.0", [hex: :jsx, repo: "hexpm", optional: false]}, {:lhttpc, "1.5.3", [hex: :lhttpc, repo: "hexpm", optional: false]}], "hexpm"},
+  "gen_stage": {:hex, :gen_stage, "0.12.2", "e0e347cbb1ceb5f4e68a526aec4d64b54ad721f0a8b30aa9d28e0ad749419cbb", [], [], "hexpm"},
+  "jsx": {:hex, :jsx, "2.8.0", "749bec6d205c694ae1786d62cea6cc45a390437e24835fd16d12d74f07097727", [], [], "hexpm"},
+  "lhttpc": {:hex, :lhttpc, "1.5.3", "f87f1aa17c29ef57994de47f679d2ef43e4cf7bf9a3f476f0b4243f2de541d0a", [], [], "hexpm"}}
