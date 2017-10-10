@@ -14,7 +14,6 @@ defmodule Squest.Mixfile do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      applications: [:erlcloud],
       extra_applications: [:logger],
       mod: {Squest.Application, []}
     ]

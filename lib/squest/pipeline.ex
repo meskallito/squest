@@ -11,6 +11,9 @@ defmodule Squest.Pipeline do
   import Squest.MessageHandler, only: [valid_message_handler?: 1]
   import Squest.SQS, only: [queue_exists?: 1]
 
+  @default_workers_count 4
+  @sqs Application.fetch_env!(:squest, :sqs_module)
+
   defmodule NonExistentQueueError do
     defexception [:queue_name]
 
@@ -41,9 +44,9 @@ defmodule Squest.Pipeline do
 
   def init([queue_name, message_handler, options]) do
     producer_name = String.to_atom(queue_name <> "_producer")
-    number_of_workers = Keyword.get(options, :workers_count, 4)
+    number_of_workers = Keyword.get(options, :workers_count, @default_workers_count)
 
-    unless queue_exists?(queue_name), do: raise %NonExistentQueueError{queue_name: queue_name}
+    unless @sqs.queue_exists?(queue_name), do: raise %NonExistentQueueError{queue_name: queue_name}
     unless valid_message_handler?(message_handler) do
       raise %BadMessageHandlerError{message_handler: message_handler}
     end
