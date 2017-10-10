@@ -8,4 +8,5 @@ end
 
 Application.put_env(:squest, :sqs_module, SQSMock)
 SQSMock.start_link()
+MessageHandlerMock.start_link()
 

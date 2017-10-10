@@ -1,9 +1,9 @@
 defmodule Squest.Pipeline.MessageProducer do
   use GenStage
-  alias Squest.SQS
   require Logger
 
   @default_idle_timeout 5000
+  @sqs Application.fetch_env!(:squest, :sqs_module)
 
   def start_link(process_name, queue_name, options) do
     GenStage.start_link(
@@ -48,7 +48,7 @@ defmodule Squest.Pipeline.MessageProducer do
   def handle_info(:load_new_messages, %{queue_name: queue_name, demand: demand} = state) do
     Logger.debug inspect("try to load #{demand} messages")
 
-    sqs_messages = SQS.receive_messages(queue_name, demand)
+    sqs_messages = @sqs.receive_messages(queue_name, demand)
     loaded_messages_count = Enum.count(sqs_messages)
 
     schedule_next_hit(loaded_messages_count, demand, state.idle_timeout)
@@ -64,7 +64,7 @@ defmodule Squest.Pipeline.MessageProducer do
     Logger.debug("schedule immediate job")
   end
 
-  defp schedule_next_hit(loaded_count, demand, idle_timeout) do
+  defp schedule_next_hit(_loaded_count, _demand, idle_timeout) do
     Process.send_after(self(), :load_new_messages, idle_timeout)
     Logger.debug("schedule delayed job. timeout is #{idle_timeout}")
   end

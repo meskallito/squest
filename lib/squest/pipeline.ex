@@ -9,7 +9,6 @@ defmodule Squest.Pipeline do
   require IEx
 
   import Squest.MessageHandler, only: [valid_message_handler?: 1]
-  import Squest.SQS, only: [queue_exists?: 1]
 
   @default_workers_count 4
   @sqs Application.fetch_env!(:squest, :sqs_module)

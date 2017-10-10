@@ -22,6 +22,7 @@ defmodule Squest.Mixfile do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:uuid, "~> 1.1"},
       {:gen_stage, "~> 0.12.2"},
       {:erlcloud, "~> 2.2.15"}
     ]

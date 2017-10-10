@@ -1,6 +1,7 @@
 defmodule Squest.Pipeline.MessageConsumer do
 
   import Squest.SQS, only: [delete_message: 2]
+  @sqs Application.fetch_env!(:squest, :sqs_module)
 
   require Logger
   require IEx
@@ -9,7 +10,7 @@ defmodule Squest.Pipeline.MessageConsumer do
     Task.start_link(fn ->
       try do
         message_handler.handle_message(sqs_message)
-        delete_message(
+        @sqs.delete_message(
           sqs_message.__queue_name__,
           sqs_message.receipt_handle
         )
