@@ -1,7 +1,7 @@
-defmodule Squest.Pipeline.ConsumerSupervisor do
+defmodule Squest.QueuePoller.ConsumerSupervisor do
   use ConsumerSupervisor
 
-  alias Squest.Pipeline.MessageConsumer
+  alias Squest.QueuePoller.MessageConsumer
 
   require Logger
 

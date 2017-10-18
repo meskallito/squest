@@ -1,9 +1,9 @@
-defmodule Squest.Pipeline.MessageConsumer do
+defmodule Squest.QueuePoller.MessageConsumer do
 
   @sqs Application.fetch_env!(:squest, :sqs_module)
 
-  require Logger
   require IEx
+  require Logger
 
   def start_link(message_handler, retry_strategy, sqs_message) do
     Task.start_link(fn ->

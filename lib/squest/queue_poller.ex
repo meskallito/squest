@@ -1,8 +1,8 @@
-defmodule Squest.Pipeline do
+defmodule Squest.QueuePoller do
   use Supervisor
 
-  alias Squest.Pipeline.MessageProducer
-  alias Squest.Pipeline.ConsumerSupervisor
+  alias Squest.QueuePoller.MessageProducer
+  alias Squest.QueuePoller.ConsumerSupervisor
   alias Squest.ExponentialBackoff
 
   require Logger

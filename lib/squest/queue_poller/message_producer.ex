@@ -1,4 +1,4 @@
-defmodule Squest.Pipeline.MessageProducer do
+defmodule Squest.QueuePoller.MessageProducer do
   use GenStage
   require Logger
 

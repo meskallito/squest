@@ -1,7 +1,7 @@
-defmodule Squest.PipelineTest do
+defmodule Squest.QueuePollerTest do
   use ExUnit.Case, async: true
 
-  alias Squest.Pipeline, as: P
+  alias Squest.QueuePoller, as: P
 
   import ExUnit.CaptureLog
 
@@ -23,13 +23,13 @@ defmodule Squest.PipelineTest do
   end
 
   test "message handler doesn't implement MessageHandlerBehaviour" do
-    assert_raise Squest.Pipeline.BadMessageHandlerError, fn ->
+    assert_raise Squest.QueuePoller.BadMessageHandlerError, fn ->
       assert P.init(["test_queue_name", WrongHandler, []]) == {}
     end
   end
 
   test "queue doesn't exist" do
-    assert_raise Squest.Pipeline.NonExistentQueueError, fn ->
+    assert_raise Squest.QueuePoller.NonExistentQueueError, fn ->
       assert P.init(["non_existing_queue_name", EmptyTestHandler, []]) == {}
     end
   end

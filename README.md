@@ -33,14 +33,14 @@ Alternatively you can launch your own supervisor with:
 
 ```elixir
   children = [
-    {Squest.Pipeline, ["test", YourJobHandler, [workers_count: 10]]},
+    {Squest.QueuePoller, ["test", YourJobHandler, [workers_count: 10]]},
   ]
 
   opts = [strategy: :one_for_one, name: YourApp.Supervisor]
   Supervisor.start_link(children, opts)
 ```
 
-You handler should be defined as follows:
+Your handler should be defined as follows:
 
 ```elixir
 defmodule YourApp.TestHandler do

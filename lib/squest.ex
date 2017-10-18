@@ -12,9 +12,9 @@ defmodule Squest do
       :world
 
   """
-  alias Squest.PipelinePool
+  alias Squest.QueuePollerPool
 
   def register_queue(queue_path, message_handler, options \\ []) do
-    PipelinePool.start_pipeline(queue_path, message_handler, options)
+    QueuePollerPool.start_queue_poller(queue_path, message_handler, options)
   end
 end
