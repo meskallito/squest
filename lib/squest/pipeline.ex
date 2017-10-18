@@ -44,6 +44,7 @@ defmodule Squest.Pipeline do
   def init([queue_name, message_handler, options]) do
     producer_name = String.to_atom(queue_name <> "_producer")
     number_of_workers = Keyword.get(options, :workers_count, @default_workers_count)
+    retry_strategy = Keyword.get(options, :retry_strategy, ExponentialBackoff)
 
     unless @sqs.queue_exists?(queue_name), do: raise %NonExistentQueueError{queue_name: queue_name}
     unless valid_message_handler?(message_handler) do
@@ -56,7 +57,7 @@ defmodule Squest.Pipeline do
         [
           producers: [{producer_name, max_demand: number_of_workers, min_demand: 1}],
           message_handler: message_handler,
-          retry_strategy: ExponentialBackoff
+          retry_strategy: retry_strategy
         ]
       ]),
     ]

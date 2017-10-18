@@ -2,7 +2,7 @@ defmodule Squest.ExponentialBackoff do
   @behaviour Squest.Behaviour.RetryStrategy
 
   require Logger
-  import Squest.SQS, only: [change_message_visibility: 3]
+  @sqs Application.fetch_env!(:squest, :sqs_module)
 
   def schedule_retry(sqs_message) do
     attempts = sqs_message.attributes[:approximate_receive_count]
@@ -14,7 +14,7 @@ defmodule Squest.ExponentialBackoff do
     #the maximum visibility timeout is 12h
     max_timeout = 43200 - round((:os.system_time(:milli_seconds) - started_at)/1000)
 
-    change_message_visibility(
+    @sqs.change_message_visibility(
       sqs_message.__queue_name__,
       sqs_message.receipt_handle,
       Enum.min([max_timeout, interval])

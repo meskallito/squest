@@ -1,6 +1,5 @@
 defmodule Squest.Pipeline.MessageConsumer do
 
-  import Squest.SQS, only: [delete_message: 2]
   @sqs Application.fetch_env!(:squest, :sqs_module)
 
   require Logger
